@@ -1,0 +1,271 @@
+package MotorPH;
+
+import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+
+public class MotorphInitial {
+
+    // Employee data
+    private static String[] employeeIDs = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+            "11", "12", "13", "14", "15", "16", "17", "18", "19", "20",
+            "21", "22", "23", "24", "25", "26", "27", "28", "29", "30",
+            "31", "32", "33", "34"};
+    private static String[] lastNames = {"Doe", "Smith", "Johnson", "Garcia", "Lim", "Aquino", "Reyes",
+            "Hernandez", "Villanueva", "San Jose", "Romualdez", "Atienza",
+            "Alvaro", "Salcedo", "Lopez", "Farala", "Martinez", "Romualdez",
+            "Mata", "De Leon", "San Jose", "Rosario", "Bautista", "Lazaro",
+            "Delos Santos", "Santos", "Del Rosario", "Tolentino", "Gutierrez",
+            "Manalaysay", "Villegas", "Ramos", "Maceda", "Aguilar", "Castro",
+            "Martinez", "Santos"};
+    private static String[] firstNames = {"John", "Emily", "Michael", "Manuel III", "Antonio", "Bianca Sofia",
+            "Isabella", "Eduard", "Andrea Mae", "Brad", "Alice", "Rosie",
+            "Roderick", "Anthony", "Josie", "Martha", "Leila", "Fredrick",
+            "Christian", "Selena", "Allison", "Cydney", "Mark", "Darlene",
+            "Kolby", "Vella", "Tomas", "Jacklyn", "Percival", "Garfield",
+            "Lizeth", "Carol", "Emelia", "Delia", "John Rafael", "Carlos Ian",
+            "Beatriz"};
+    private static String[] birthDates = {"10/11/1983", "06/19/1988", "08/04/1989", "06/16/1994", "09/23/1989",
+            "02/14/1988", "03/15/1996", "05/14/1992", "09/24/1948", "03/30/1988",
+            "09/14/1993", "01/14/1987", "01/11/1942", "07/11/1970", "03/10/1985",
+            "10/21/1987", "02/20/1975", "06/24/1986", "10/06/1996", "02/12/1991",
+            "11/25/1985", "02/26/1980", "12/31/1983", "12/18/1978", "05/19/1984",
+            "12/18/1970", "08/28/1986", "12/12/1981", "08/20/1978", "04/14/1973",
+            "01/27/1989", "02/09/1992", "11/16/1990", "08/07/1990"};
+    private static String[] addresses = {"Valero Carpark Building Valero Street 1227, Makati City",
+            "San Antonio De Padua 2, Block 1 Lot 8 and 2, Dasmarinas, Cavite",
+            "Rm. 402 4/F Jiao Building Timog Avenue Cor. Quezon Avenue 1100, Quezon City",
+            "460 Solanda Street Intramuros 1000, Manila",
+            "National Highway, Gingoog,  Misamis Occidental",
+            "17/85 Stracke Via Suite 042, Poblacion, Las Piñas 4783 Dinagat Islands",
+            "99 Strosin Hills, Poblacion, Bislig 5340 Tawi-Tawi",
+            "12A/33 Upton Isle Apt. 420, Roxas City 1814 Surigao del Norte",
+            "90A Dibbert Terrace Apt. 190, San Lorenzo 6056 Davao del Norte",
+            "#284 T. Morato corner, Scout Rallos Street, Quezon City",
+            "93/54 Shanahan Alley Apt. 183, Santo Tomas 1572 Masbate",
+            "49 Springs Apt. 266, Poblacion, Taguig 3200 Occidental Mindoro"};
+    private static String[] phoneNumbers = {"966-860-270", "171-867-411", "966-889-370", "786-868-477", "088-861-012",
+            "918-621-603", "797-009-261", "983-606-799", "266-036-427", "053-381-386",
+            "070-766-300", "478-355-427", "329-034-366", "877-110-749", "023-079-009",
+            "783-776-744", "975-432-139", "179-075-129", "868-819-912", "683-725-348"};
+    private static String[] positions = {"Chief Executive Officer", "Chief Operating Officer", "Chief Finance Officer",
+            "Chief Marketing Officer", "IT Operations and Systems", "HR Manager",
+            "HR Team Leader", "HR Rank and File", "HR Rank and File", "Accounting Head",
+            "Payroll Manager", "Payroll Team Leader", "Payroll Rank and File",
+            "Payroll Rank and File", "Account Manager", "Account Team Leader",
+            "Account Team Leader", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Account Rank and File", "Account Rank and File",
+            "Account Rank and File", "Sales & Marketing", "Supply Chain and Logistics",
+            "Customer Service and Relations"};
+    private static int[] basicSalaries = {90000, 60000, 60000, 60000, 52670, 52670, 42975, 22500, 22500, 52670, 50825,
+            38475, 24000, 24000, 53500, 42975, 41850, 22500, 22500, 23250, 23250, 24000,
+            22500, 22500, 24000, 24750, 24750, 24000, 22500, 22500, 22500, 52670, 52670,
+            52670};
+    private static double[] hourlyRates = {535.71, 357.14, 357.14, 357.14, 313.51, 313.51, 255.80, 133.93, 133.93,
+            313.51, 302.53, 229.02, 142.86, 142.86, 318.45, 255.80, 249.11, 133.93,
+            133.93, 138.39, 138.39, 142.86, 133.93, 133.93, 142.86, 147.32, 147.32,
+            142.86, 133.93, 133.93, 133.93, 313.51, 313.51, 313.51};
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        boolean continueComputation = true;
+
+        while (continueComputation) {
+            try {
+                System.out.print("Enter employee ID: ");
+                String employeeID = scanner.nextLine();
+
+                int index = Integer.parseInt(employeeID) - 1;
+
+                if (index < 0 || index >= employeeIDs.length) {
+                    System.out.println("Employee ID out of range. Please enter a valid employee ID.");
+                    continue;
+                }
+
+                System.out.println("\nEmployee Details:");
+                System.out.println("ID: " + employeeIDs[index]);
+                System.out.println("Last Name: " + lastNames[index]);
+                System.out.println("First Name: " + firstNames[index]);
+                System.out.println("Birth Date: " + birthDates[index]);
+                System.out.println("Address: " + addresses[index]);
+                System.out.println("Phone Number: " + phoneNumbers[index]);
+                System.out.println("Position: " + positions[index]);
+                System.out.println("Basic Salary: " + basicSalaries[index]);
+                System.out.println("Hourly Rate: " + hourlyRates[index]);
+
+                // Prompt for login and logout times
+                System.out.print("Enter login time (ex. 08:00): ");
+                String loginTimeStr = scanner.nextLine();
+
+                System.out.print("Enter logout time (ex. 17:00): ");
+                String logoutTimeStr = scanner.nextLine();
+
+                // Calculate duration between login and logout times
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+                Date loginTime = dateFormat.parse(loginTimeStr);
+                Date logoutTime = dateFormat.parse(logoutTimeStr);
+
+                long durationMillis = logoutTime.getTime() - loginTime.getTime();
+                double hoursWorked = durationMillis / (1000 * 60 * 60.0);
+
+                // Subtract 1 hour for lunch break
+                hoursWorked -= 1.0;
+
+                // Calculate monthly salary based on hours worked
+                double monthlySalary = calculateMonthlySalary(basicSalaries[index], hourlyRates[index], hoursWorked);
+
+                // Calculate deductions
+                double philhealthDeduction = calculatePhilHealthDeduction(monthlySalary);
+                double sssContribution = calculateSSSContribution(monthlySalary);
+                double pagIbigContribution = calculatePagIbigContribution(monthlySalary);
+                double withholdingTaxDeduction = calculateWithholdingTaxDeduction(monthlySalary);
+
+                // Display deduction breakdown
+                displayDeductionBreakdown(philhealthDeduction, sssContribution, pagIbigContribution, withholdingTaxDeduction);
+
+                // Calculate total deductions and net salary
+                double totalDeductions = philhealthDeduction + sssContribution + pagIbigContribution + withholdingTaxDeduction;
+                double netSalary = monthlySalary - totalDeductions;
+
+                // Display total deductions and net salary
+                System.out.printf("Total Deductions: ₱%.2f\n", totalDeductions);
+                System.out.printf("Net Salary: ₱%.2f\n", netSalary);
+
+                System.out.print("Do you want to make another computation? (yes/no): ");
+                String input = scanner.nextLine().trim().toLowerCase();
+                continueComputation = input.equals("yes");
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid employee ID. Please enter a valid employee ID.");
+            } catch (ParseException e) {
+                System.out.println("Invalid time format. Please enter the time in HH:mm format.");
+            }
+        }
+        scanner.close();
+    }
+
+    private static double calculateMonthlySalary(int basicSalary, double hourlyRate, double hoursWorked) {
+        return basicSalary > 0 ? basicSalary : hourlyRate * hoursWorked * 20; // Assuming 20 workdays in a month
+    }
+
+    private static double calculatePhilHealthDeduction(double monthlySalary) {
+        if (monthlySalary <= 10000) {
+            return 300.00;
+        } else if (monthlySalary <= 59999.99) {
+            return Math.min(1800, monthlySalary * 0.03);
+        } else {
+            return 1800.00;
+        }
+    }
+
+    private static double calculateSSSContribution(double monthlySalary) {
+        double[][] sssContributionRanges = {
+            {0, 3250, 135.00},
+            {3250, 3750, 157.50},
+            {3750, 4250, 180.00},
+            {4250, 4750, 202.50},
+            {4750, 5250, 225.00},
+            {5250, 5750, 247.50},
+            {5750, 6250, 270.00},
+            {6250, 6750, 292.50},
+            {6750, 7250, 315.00},
+            {7250, 7750, 337.50},
+            {7750, 8250, 360.00},
+            {8250, 8750, 382.50},
+            {8750, 9250, 405.00},
+            {9250, 9750, 427.50},
+            {9750, 10250, 450.00},
+            {10250, 10750, 472.50},
+            {10750, 11250, 495.00},
+            {11250, 11750, 517.50},
+            {11750, 12250, 540.00},
+            {12250, 12750, 562.50},
+            {12750, 13250, 585.00},
+            {13250, 13750, 607.50},
+            {13750, 14250, 630.00},
+            {14250, 14750, 652.50},
+            {14750, 15250, 675.00},
+            {15250, 15750, 697.50},
+            {15750, 16250, 720.00},
+            {16250, 16750, 742.50},
+            {16750, 17250, 765.00},
+            {17250, 17750, 787.50},
+            {17750, 18250, 810.00},
+            {18250, 18750, 832.50},
+            {18750, 19250, 855.00},
+            {19250, 19750, 877.50},
+            {19750, 20250, 900.00},
+            {20250, 20750, 922.50},
+            {20750, 21250, 945.00},
+            {21250, 21750, 967.50},
+            {21750, 22250, 990.00},
+            {22250, 22750, 1012.50},
+            {22750, 23250, 1035.00},
+            {23250, 23750, 1057.50},
+            {23750, 24250, 1080.00},
+            {24250, 24750, 1102.50},
+            {24750, Double.MAX_VALUE, 1125.00},
+        };
+
+        for (double[] range : sssContributionRanges) {
+            double lowerBound = range[0];
+            double upperBound = range[1];
+            double contribution = range[2];
+
+            if (monthlySalary >= lowerBound && monthlySalary < upperBound) {
+                return contribution;
+            }
+        }
+        return 0.0; // Default value if salary doesn't fall within any range
+    }
+
+    private static double calculatePagIbigContribution(double monthlySalary) {
+        double[][] pagIbigContributionRanges = {
+            {1000, 1500, 0.01, 0.02, 0.03},
+            {1500, Double.MAX_VALUE, 0.02, 0.02, 0.04}
+        };
+
+        for (double[] range : pagIbigContributionRanges) {
+            double lowerBound = range[0];
+            double upperBound = range[1];
+            double employeeRate = range[2];
+            double employerRate = range[3];
+            double totalRate = range[4];
+
+            if (monthlySalary >= lowerBound && monthlySalary <= upperBound) {
+                return monthlySalary * totalRate;
+            }
+        }
+        return 0.0; // Default value if salary doesn't fall within any range
+    }
+
+    private static double calculateWithholdingTaxDeduction(double monthlySalary) {
+        if (monthlySalary <= 20832) {
+            return 0.0;
+        } else if (monthlySalary <= 33333) {
+            return (monthlySalary - 20832) * 0.20;
+        } else if (monthlySalary <= 66667) {
+            return 2500 + (monthlySalary - 33333) * 0.25;
+        } else if (monthlySalary <= 166667) {
+            return 10833 + (monthlySalary - 66667) * 0.30;
+        } else if (monthlySalary <= 666667) {
+            return 40833.33 + (monthlySalary - 166667) * 0.32;
+        } else {
+            return 200833.33 + (monthlySalary - 666667) * 0.35;
+        }
+    }
+
+    private static void displayDeductionBreakdown(double philhealthDeduction, double sssContribution,
+                                                   double pagIbigContribution, double withholdingTaxDeduction) {
+        System.out.println("\nDeduction Breakdown:");
+        System.out.printf("PhilHealth Deduction: ₱%.2f\n", philhealthDeduction);
+        System.out.printf("SSS Contribution: ₱%.2f\n", sssContribution);
+        System.out.printf("Pag-IBIG Contribution: ₱%.2f\n", pagIbigContribution);
+        System.out.printf("Withholding Tax Deduction: ₱%.2f\n", withholdingTaxDeduction);
+    }
+}
